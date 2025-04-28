@@ -16,6 +16,20 @@ public class Transaction {
         this.vendor = vendor;
         this.amount = amount;
     }
+    public static Transaction fromCSV(String line) {
+        String[] parts = line.split("\\|");
+        return new Transaction(
+                LocalDate.parse(parts[0]),
+                LocalTime.parse(parts[1]),
+                parts[2],
+                parts[3],
+                Double.parseDouble(parts[4])
+        );
+    }
+
+    public String toCSV() {
+        return String.format("%s|%s|%s|%s|%.2f", date, time, description, vendor, amount);
+    }
     //Getters
     public LocalDate getDate() { return date; }
     public double getAmount() { return amount; }
