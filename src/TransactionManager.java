@@ -5,13 +5,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class TransactionManager {
-    private static final String FILE = "transactions.csv";
+    private final String file = "transactions.csv";
 
     public List<Transaction> loadTransactions() {
         List<Transaction> transactions = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
+                if (line.startsWith("date|")) continue; // Skip header
                 transactions.add(Transaction.fromCSV(line));
             }
         } catch (IOException e) {
@@ -21,7 +22,7 @@ public class TransactionManager {
     }
 
     public void saveTransaction(Transaction tx) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE, true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             writer.write(tx.toCSV());
             writer.newLine();
         } catch (IOException e) {
@@ -34,6 +35,7 @@ public class TransactionManager {
                 .sorted(Comparator.comparing(Transaction::getDate).reversed())
                 .forEach(System.out::println);
     }
+
 
     public List<Transaction> filterDeposits(List<Transaction> txs) {
         return txs.stream().filter(tx -> tx.getAmount() > 0).collect(Collectors.toList());

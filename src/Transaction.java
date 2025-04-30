@@ -29,9 +29,6 @@ public class Transaction {
         );
     }
 
-    public String toCSV() {
-        return String.format("%s | %s | %s | %s | %.2f", date, time, description, vendor, amount);
-    }
     //Getters
     public LocalDate getDate() { return date; }
     public LocalTime getTime() { return time; }
@@ -56,7 +53,11 @@ public class Transaction {
         this.amount = amount;
     }
 
+    public String toCSV() {
+        return String.format("%s | %s | %s | %s | %.2f", date, time, description, vendor, amount);
+    }
 
+    //Display override
     public String toString() {
         return String.format("%s | %s | %s | %s | %.2f", date, time, description, vendor, amount);
     }
