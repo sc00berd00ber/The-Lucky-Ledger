@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
-public class MainApp {
+public class Main {
     private static final Scanner scanner = new Scanner(System.in);
     private static final TransactionManager manager = new TransactionManager();
 
     public static void main(String[] args) {
-        new MainApp().run();
+        new Main().run();
     }
 
     public void run() {
