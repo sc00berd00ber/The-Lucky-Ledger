@@ -27,7 +27,6 @@ public class MainApp {
     }
 }
 
-
 //    static void addTransaction(boolean isDeposit) {
 //        System.out.print("Description: ");
 //        String desc = scanner.nextLine();
