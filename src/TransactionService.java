@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,5 +20,10 @@ public class TransactionService {
 
     public List<Transaction> filterByDateRange(List<Transaction> txs, LocalDate from, LocalDate to) {
         return txs.stream().filter(tx -> !tx.getDate().isBefore(from) && !tx.getDate().isAfter(to)).collect(Collectors.toList());
+    }
+    public void display(List<Transaction> txList) {
+        txList.stream()
+                .sorted(Comparator.comparing(Transaction::getDate).reversed())
+                .forEach(System.out::println);
     }
 }
