@@ -17,11 +17,16 @@ public class Main {
             System.out.println("X) Exit");
             System.out.print("Select: ");
             switch (scanner.nextLine().trim().toUpperCase()) {
-                case "D": manager.addTransaction(true); break;
-                case "P": manager.addTransaction(false); break;
-                case "L": manager.ledgerMenu(); break;
-                case "X": return;
-                default: System.out.println("Invalid choice.");
+                case "D": manager.addTransaction(true);
+                break;
+                case "P": manager.addTransaction(false);
+                break;
+                case "L": manager.ledgerMenu();
+                break;
+                case "X":
+                    return;
+                default:
+                    System.out.println("Invalid choice. Try again!");
             }
         }
     }
