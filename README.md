@@ -7,13 +7,16 @@ Multiple menu options give you the freedom to personalize and organize your ledg
 ![Screenshot 2025-05-02 092952](https://github.com/user-attachments/assets/137e054e-9266-4690-9d4d-d840646df58a)
 
 ```java
-public void save(Transaction tx) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
-            writer.write(tx.toCSV());
-            writer.newLine();
-        } catch (IOException e) {
-            System.out.println("Error saving transaction: " + e.getMessage());
-        }
+//Parser
+    public static Transaction fromCSV(String line) {
+        String[] parts = line.split("\\|");
+        return new Transaction(
+                LocalDate.parse(parts[0].trim()),
+                LocalTime.parse(parts[1].trim()),
+                parts[2].trim(),
+                parts[3].trim(),
+                Double.parseDouble(parts[4].trim())
+        );
     }
 ```
 I found this piece of code interesting because while seemingly simple andboring, it was one of the most crucial parts of my program. This chunk of code is responsible for writing lines of string onto the "transactions.csv" file. It took a little bit of time to work out the kinks and make it as efficient as possible, but I am proud of the way it turned out.
