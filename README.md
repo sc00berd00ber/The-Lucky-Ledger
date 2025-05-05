@@ -1,4 +1,4 @@
-<h1 align="center">💰 Transaction Ledger Application 💰</h1>  
+<h1 align="center">💰 The Lucky Ledger 💰</h1>  
 
 Welcome to the Lucky Ledger, every accountant's dream application. My program allows users to track all business and personal transactions with ease. Multiple menu options give you the freedom to personalize and organize your ledger to your liking while also displaying your transactions in a clean and readable manner.
 
