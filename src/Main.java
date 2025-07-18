@@ -10,11 +10,11 @@ public class Main {
 
     public void run() {
         while (true) {
-            System.out.println("\n== HOME ==");
-            System.out.println("D) Add Deposit");
-            System.out.println("P) Make Payment");
-            System.out.println("L) Ledger");
-            System.out.println("X) Exit");
+            System.out.println("\n=*=*=*=*=*=*=*=*=*=*=*=*=*== HOME =*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=");
+            System.out.println("[D] Add Deposit");
+            System.out.println("[P] Make Payment");
+            System.out.println("[L] Ledger");
+            System.out.println("[X] Exit");
             System.out.print("Select: ");
             switch (scanner.nextLine().trim().toUpperCase()) {
                 case "D": manager.addTransaction(true);
