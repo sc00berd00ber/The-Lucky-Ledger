@@ -1,41 +1,70 @@
 <h1 align="center">💰 The Lucky Ledger 💰</h1>  
 
-Welcome to the Lucky Ledger, every accountant's dream application. My program allows users to track all business and personal transactions with ease. Multiple menu options give you the freedom to personalize and organize your ledger to your liking while also displaying your transactions in a clean and readable manner.
+Welcome to **The Lucky Ledger** — every accountant's dream application!
+This Java-based CLI app allows users to securely log in and track personal or business transactions.
+With built-in reporting, CSV persistence, and clean organization, you’ll never lose track of your ledger again.
 
+---
 
-<h2>📦 Features</h2>    
+## 📦 Features
 
-* 📥 Add Deposit: Add positive amount transactions.
+- **🔐 User Login System**
+- Secure login using credentials stored in `users.csv`
+- Only see and interact with your own data
 
-* 💸 Make Payment: Record payments as negative transactions.
+- **📥 Add Deposit**
+- Add income/positive transactions
 
-* 📂 Ledger View:
+- **💸 Make Payment**
+- Record expenses (automatically saved as negative amounts)
 
-    * View All Transactions
+- **📂 Ledger View**
+- View All Transactions
+- Filter by Deposits or Payments
+- Generate Reports (by time or vendor)
 
-    * Filter by Deposits or Payments
+- **📊 Reports**
+- Month-to-Date
+- Previous Month
+- Year-to-Date
+- Previous Year
+- Search by Vendor
 
-    * Generate Reports based on time periods or vendor
+- **💾 Persistent Storage**
+- All transactions saved in `transactions.csv`
+- Transactions are user-specific
 
-* 💾 Persistent Storage: All data is saved to and read from transactions.csv.
+---
 
-* 📊 Reports:
+## 📋 How to Use
 
-    * Month-to-date
+### 🏁 Launch the App
 
-    * Previous month
+Run the main program:
+```bash
+java Main
+```
 
-    * Year-to-date
+### 🔐 Login Prompt
+Users must log in before accessing the ledger.
+```text
+Username: alice
+Password: 1234
+Login successful.
+```
 
-    * Previous year
+Credentials are stored in `users.csv`:
+```
+username,password
+alice,1234
+bob,passw0rd
+```
 
-    * Vendor-specific
+---
 
-* 📋 How to Use
-  
-Upon launching the application, you'll see a main menu:
+### 📜 Main Menu
 
-```java
+```text
 == HOME ==
 D) Add Deposit
 P) Make Payment
@@ -43,36 +72,36 @@ L) Ledger
 X) Exit
 Select:
 ```
-<h2> Adding Transactions</h2>    
 
-* Choose D for Deposit or P for Payment
+### 💰 Adding a Transaction
+```text
+Select: D
+Description: Paycheck
+Vendor: ACME Corp
+Amount: 2500.00
+Transaction recorded.
+```
 
-* You'll be prompted to enter:
+> Payments are stored as **negative** amounts automatically.
 
-    * Description
+---
 
-    * Vendor
+### 📂 Viewing the Ledger
 
-    * Amount
-
-* 💡 Payments are automatically saved as negative amounts.
-
-<h2> Viewing the Ledger</h2>  
-
-* Select L to access:
-```java
+```text
 == LEDGER ==
-A) All
+A) Show Transactions
 D) Deposits
 P) Payments
 R) Reports
 H) Home
 ```
-![Screenshot 2025-05-02 093049](https://github.com/user-attachments/assets/65f4e141-857a-4062-9023-b6ad9dd8cbf8)
 
-<h2> Reports Menu </h2>  
+---
 
-``` java
+### 📊 Reports Menu
+
+```text
 == REPORTS ==
 1) Month to Date
 2) Previous Month
@@ -81,49 +110,148 @@ H) Home
 5) Search by Vendor
 0) Back
 ```
-* Choose options to view filtered transaction lists.
 
-  <img width="659" alt="image" src="https://github.com/user-attachments/assets/1c2db057-055d-4252-a1c3-64e68955be00" />
+---
 
+## 🗃 Data Files
 
-* 🧪 Sample Output
-  
+### `users.csv`
+Stores registered usernames and passwords.
+```
+username,password
+alice,1234
+bob,passw0rd
+```
+
+### `transactions.csv`
+All user transactions:
+```
+username|date|time|description|vendor|amount
+nat|2025-05-05|14:33:21|Paycheck|ACME Corp|2500.00
+```
+
+---
+
+## 🧱 Code Highlights
+
+### User Login
 ```java
+public static String login(Map<String, String> users) {
+Scanner scanner = new Scanner(System.in);
+System.out.print("Username: ");
+String username = scanner.nextLine();
+System.out.print("Password: ");
+String password = scanner.nextLine();
 
+if (users.containsKey(username) && users.get(username).equals(password)) {
+System.out.println("Login successful.");
+return username;
+} else {
+System.out.println("Invalid login. Try again.");
+return null;
+}
+}
+```
+
+### Transaction Parser
+```java
+public static Transaction fromCSV(String line) {
+String[] parts = line.split("\|");
+return new Transaction(
+LocalDate.parse(parts[0].trim()),
+LocalTime.parse(parts[1].trim()),
+parts[2].trim(),
+parts[3].trim(),
+Double.parseDouble(parts[4].trim()),
+parts[5].trim()
+);
+}
+```
+
+---
+
+## 🧪 Sample Output
+
+```text
+== LEDGER ==
+2025-05-05 | 14:33:21 | Paycheck | ACME Corp | 2500.00
+```
+
+---
+
+
+---
+
+## 🧭 Main Menu Structure
+
+The application starts with a dynamic main menu that adapts based on whether the user is logged in or not.
+
+### 🟢 Not Logged In
+
+When the user first launches the app:
+
+```
+== HOME ==
+R) Register
+I) Login
+X) Exit
+Select:
+```
+
+- **R** – Register a new user (saved to `users.csv`)
+- **I** – Log in with username/password
+- **X** – Exit the application
+
+---
+
+### 🔐 Logged In
+
+Once authenticated, the menu expands:
+
+```
 == HOME ==
 D) Add Deposit
 P) Make Payment
 L) Ledger
+O) Logout
 X) Exit
-Select: D
-Description: Paycheck
-Vendor: ACME Corp
-Amount: 2500.00
-Transaction recorded.
-```
-```java
-== LEDGER ==
-A) All
-D) Deposits
-P) Payments
-R) Reports
-H) Home
-Select: A
-2025-05-05 | 14:33:21 | Paycheck | ACME Corp | 2500.00
+Select:
 ```
 
-```java
-//Parser
-    public static Transaction fromCSV(String line) {
-        String[] parts = line.split("\\|");
-        return new Transaction(
-                LocalDate.parse(parts[0].trim()),
-                LocalTime.parse(parts[1].trim()),
-                parts[2].trim(),
-                parts[3].trim(),
-                Double.parseDouble(parts[4].trim())
-        );
-    }
-```
-* I found this piece of code interesting because while seemingly simple andboring, it was one of the most crucial parts of my program. This chunk of code is responsible for writing lines of string onto the "transactions.csv" file. It took a little bit of time to work out the kinks and make it as efficient as possible, but I am proud of the way it turned out.
+- **D** – Add a deposit transaction (saved with current user's name)
+- **P** – Add a payment (saved as negative amount)
+- **L** – Open the Ledger Menu to view or filter transactions
+- **O** – Log out the current user
+- **X** – Exit the program
+
+---
+
+
+## 🧑‍💻 Contributors
+
+- **Bemnet** – User authentication, user credential loading, login system
+- **Fardosa** – Transaction parser, CSV file integration, deposit/payment logic
+- **Marcon** – Report generation features (Month-to-date, YTD, vendor filtering)
+- **Nat** – Ledger view filters (All, Deposits, Payments) and menu handling
+- **Milly** – Persistent storage, transaction writing and formatting
+
+---
+
+## ✅ TODOs (Optional Enhancements)
+
+- [ ] Password hashing
+- [ ] Admin user role
+- [ ] Export reports to PDF/Excel
+- [ ] GUI interface (JavaFX or Swing)
+- [ ] Encrypted transaction file
+
+---
+
+## 📜 License
+
+This project is for educational use and not licensed for commercial deployment.
+
+---
+
+> *"Simple systems make powerful tools. The Lucky Ledger turns string parsing and CSVs into a clean, multi-user ledger app."*
 
