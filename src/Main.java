@@ -10,6 +10,11 @@ public class Main {
         new Main().run();
     }
 
+    private static String inString(String prompt) {
+        System.out.print(prompt);
+        return scanner.nextLine().trim();
+    }
+
     public void run() {
         while (true) {
             System.out.println("\n== HOME ==");
@@ -28,10 +33,8 @@ public class Main {
             if (currentUser == null) {
                 switch (choice) {
                     case "R":
-                        System.out.print("Enter username: ");
-                        String regUser = scanner.nextLine();
-                        System.out.print("Enter password: ");
-                        String regPass = scanner.nextLine();
+                        String regUser = inString("Enter username: ");
+                        String regPass = inString("Enter password: ");
                         if (userManager.register(regUser, regPass)) {
                             System.out.println("Registration successful. You can now login.");
                         } else {
@@ -39,10 +42,8 @@ public class Main {
                         }
                         break;
                     case "I":
-                        System.out.print("Enter username: ");
-                        String logUser = scanner.nextLine();
-                        System.out.print("Enter password: ");
-                        String logPass = scanner.nextLine();
+                        String logUser = inString("Enter username: ");
+                        String logPass = inString("Enter password: ");
                         User user = userManager.login(logUser, logPass);
                         if (user != null) {
                             currentUser = user;
