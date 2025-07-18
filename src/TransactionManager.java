@@ -7,13 +7,15 @@ public class TransactionManager {
     private final TransactionService service = new TransactionService();
     private final Scanner scanner = new Scanner(System.in);
 
+    private String inString(String prompt) {
+        System.out.print(prompt);
+        return scanner.nextLine().trim();
+    }
+
     public void addTransaction(String username, boolean isDeposit) {
-        System.out.print("Description: ");
-        String desc = scanner.nextLine();
-        System.out.print("Vendor: ");
-        String vendor = scanner.nextLine();
-        System.out.print("Amount: ");
-        double amt = Double.parseDouble(scanner.nextLine());
+        String desc = inString("Description: ");
+        String vendor = inString("Vendor: ");
+        double amt = Double.parseDouble(inString("Amount: "));
         if (!isDeposit) amt = -Math.abs(amt);
         Transaction tx = new Transaction(username, LocalDate.now(), java.time.LocalTime.now(), desc, vendor, amt);
         fileHandler.save(tx);
@@ -25,7 +27,7 @@ public class TransactionManager {
         while (true) {
             System.out.println("\n== LEDGER ==");
             System.out.println("A) Show Transactions\nD) Deposits\nP) Payments\nR) Reports\nH) Home");
-            switch (scanner.nextLine().trim().toUpperCase()) {
+            switch (inString("").trim().toUpperCase()) {
                 case "A": service.display(all); break;
                 case "D": service.display(service.filterDeposits(all)); break;
                 case "P": service.display(service.filterPayments(all)); break;
@@ -40,7 +42,7 @@ public class TransactionManager {
         while (true) {
             System.out.println("\n== REPORTS ==");
             System.out.println("1) Month to Date\n2) Previous Month\n3) Year to Date\n4) Previous Year\n5) Search by Vendor\n0) Back");
-            String input = scanner.nextLine();
+            String input = inString("");
             LocalDate now = LocalDate.now();
             switch (input) {
                 case "1":
@@ -61,7 +63,7 @@ public class TransactionManager {
                     break;
                 case "5":
                     System.out.print("Vendor: ");
-                    String vendor = scanner.nextLine();
+                    String vendor = inString("");
                     service.display(service.filterByVendor(all, vendor));
                     break;
                 case "0": return;
