@@ -6,39 +6,55 @@ With built-in reporting, CSV persistence, and clean organization, you’ll never
 
 ---
 
-## 📦 Features
+# 📦 Core Features
+## 📥 Add Deposit
 
-**🔐 User Login System**
-  
-- Secure login using credentials stored in `users.csv`
-- Only see and interact with your own data
+- Record income or positive transactions.
 
-**📥 Add Deposit**
-  
-- Add income/positive transactions
+## 💸 Make Payment
 
-**💸 Make Payment**
-  
-- Record expenses (automatically saved as negative amounts)
+- Record expenses, automatically storing them as negative amounts.
 
-**📂 Ledger View**
-  
-- View All Transactions
-- Filter by Deposits or Payments
-- Generate Reports (by time or vendor)
+## 📂 Ledger View
 
-**📊 Reports**
-  
+- View all transactions.
+
+- Filter transactions by deposits or payments.
+
+- Generate reports by time or vendor.
+
+## 📊 Reports
+
 - Month-to-Date
-- Previous Month
-- Year-to-Date
-- Previous Year
-- Search by Vendor
 
-**💾 Persistent Storage**
-  
-- All transactions saved in `transactions.csv`
-- Transactions are user-specific
+- Previous Month
+
+- Year-to-Date
+
+- Previous Year
+
+- Vendor-based search
+
+## 💾 Persistent Storage
+
+- Transactions are saved in a CSV file (transactions.csv).
+
+- Each user's transactions are stored individually.
+
+# ✨ New Features
+## 🔐 User Login/Registration System
+
+- Secure login using credentials stored in users.csv.
+
+- Users can only access and interact with their own data.
+
+## 🎨 Emojis for Better Readability
+
+- Use of emojis to improve the user interface and highlight key functions.
+
+## 🧹 Organized Code Structure
+
+- Refactored and cleaned up code for better readability and maintenance.
 
 ---
 
