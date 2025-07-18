@@ -9,26 +9,26 @@ With built-in reporting, CSV persistence, and clean organization, you’ll never
 ## 📦 Features
 
 - **🔐 User Login System**
-- 
+  
 - Secure login using credentials stored in `users.csv`
 - Only see and interact with your own data
 
 - **📥 Add Deposit**
-- 
+  
 - Add income/positive transactions
 
 - **💸 Make Payment**
-- 
+  
 - Record expenses (automatically saved as negative amounts)
 
 - **📂 Ledger View**
-- 
+  
 - View All Transactions
 - Filter by Deposits or Payments
 - Generate Reports (by time or vendor)
 
 - **📊 Reports**
-- 
+  
 - Month-to-Date
 - Previous Month
 - Year-to-Date
@@ -36,7 +36,7 @@ With built-in reporting, CSV persistence, and clean organization, you’ll never
 - Search by Vendor
 
 - **💾 Persistent Storage**
-- 
+  
 - All transactions saved in `transactions.csv`
 - Transactions are user-specific
 
