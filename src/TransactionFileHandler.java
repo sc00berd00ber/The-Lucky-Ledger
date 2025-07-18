@@ -13,7 +13,11 @@ public class TransactionFileHandler {
             while ((line = reader.readLine()) != null) {
                 if (line.toLowerCase().startsWith("date"))
                     continue;
-                transactions.add(Transaction.fromCSV(line));
+                try {
+                    transactions.add(Transaction.fromCSV(line));
+                } catch (Exception e) {
+                    System.out.println("Skipping malformed transaction line: " + line);
+                }
             }
 
         } catch (FileNotFoundException e) {
