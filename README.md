@@ -174,7 +174,9 @@ parts[5].trim()
 
 ```text
 == LEDGER ==
-2025-05-05 | 14:33:21 | Paycheck | ACME Corp | 2500.00
+date|time|description|vendor|amount
+nat | 2023-04-15|10:13:25|ergonomic keyboard|Amazon|-89.50
+nat | 2023-04-15|11:15:00|Invoice 1001 paid|Joe|1500.00
 ```
 
 ---
