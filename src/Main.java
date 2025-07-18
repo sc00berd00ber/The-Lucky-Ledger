@@ -34,8 +34,11 @@ public class Main {
             if (currentUser == null) {
                 switch (choice) {
                     case "R":
+
                         String regUser = inString("👤 Enter username: ");
                         String regPass = inString("🔒 Enter password: ");
+                       
+
                         if (userManager.register(regUser, regPass)) {
                             System.out.println("✅ Registration successful. You can now login. ");
                         } else {
@@ -43,8 +46,11 @@ public class Main {
                         }
                         break;
                     case "I":
+
                         String logUser = inString("👤 Enter username: ");
                         String logPass = inString("🔒 Enter password: ");
+
+                       
                         User user = userManager.login(logUser, logPass);
                         if (user != null) {
                             currentUser = user;
