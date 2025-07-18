@@ -8,7 +8,7 @@ With built-in reporting, CSV persistence, and clean organization, you’ll never
 
 ## 📦 Features
 
-- **🔐 User Login System**
+**🔐 User Login System**
   
 - Secure login using credentials stored in `users.csv`
 - Only see and interact with your own data
